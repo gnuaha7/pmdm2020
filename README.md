@@ -1,6 +1,6 @@
 # PMDM - iOS  2021  
 
-[U-TAD DAMP](https://u-tad.com/estudios/cfgs-en-desarrollo-aplicaciones-multiplataforma-dual) ‘ PMDM - iOS source for 2021.
+[U-TAD DAMP](https://u-tad.com/estudios/cfgs-en-desarrollo-aplicaciones-multiplataforma-dual)'s PMDM - iOS source for 2021.
 
 Lecture notes and examples.
 
@@ -12,3 +12,6 @@ Memory game inspired by [CS193p](https://cs193p.sites.stanford.edu)'s project. T
 - Xcode and iOS environment.
 - Swift and Swift UI structure.
 - Swift UI's view and composition concepts
+
+Covered in lectures:
+- [Intro to SwiftUI](Slides/Lecture_1_PMDM_iOS.pdf)
