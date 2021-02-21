@@ -12,6 +12,8 @@ Memory game inspired by [CS193p](https://cs193p.sites.stanford.edu)'s project. T
 - Xcode and iOS environment.
 - Swift and Swift UI structure.
 - Swift UI's view and composition concepts
+- Model-View-View Model.
 
 Covered in lectures:
 - [Intro to SwiftUI](Slides/Lecture_1_PMDM_iOS.pdf)
+- [MVVM + Swift concepts](Slides/Lecture_2_PMDM_iOS.pdf)

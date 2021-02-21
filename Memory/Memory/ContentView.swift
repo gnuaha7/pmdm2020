@@ -9,42 +9,37 @@
 import SwiftUI
 
 struct ContentView: View {
-   var body: some View {
-       VStack {
-           ForEach(0..<3) { row in
-               HStack {
-                   ForEach(0..<2) { column in
-                       let flip = ((column == 0 && row == 0)
-                                       || (column == 1 && row == 2))
-                       CardView(isFlipped: flip)
-                   }
-               }
-           }
-       }
-       .padding()
-       .foregroundColor(Color.blue)
-   }
+    var viewModel: EmojiMemoryGame
+
+    var body: some View {
+        VStack {
+            ForEach(0..<viewModel.board.cards.count) { row in
+                CardView(card: viewModel.board.cards[row])
+            }
+        }
+        .padding()
+        .foregroundColor(Color.blue)
+    }
 }
 
 struct CardView: View{
-   var isFlipped: Bool
+    var card: MemoryBoard<String>.Card
 
-   var body: some View {
-       GeometryReader { geometry in
-           ZStack {
-               if isFlipped {
-                   RoundedRectangle(cornerRadius: 10.0)
-                       .stroke()
-                   RoundedRectangle(cornerRadius: 10.0)
-                    .fill(Color.gray.opacity(0.25))
-                   Text("🇪🇸")
-                       .font(Font.system(size: min(geometry.size.height, geometry.size.width) - 20))
-               } else {
-                   RoundedRectangle(cornerRadius: 10.0)
-               }
-           }
-       }
-   }
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                if card.isFlipped {
+                    RoundedRectangle(cornerRadius: 10.0)
+                        .stroke()
+                    RoundedRectangle(cornerRadius: 10.0)
+                        .fill(Color.gray.opacity(0.25))
+                    Text(card.content).font(Font.system(size: min(geometry.size.height, geometry.size.width) - 20))
+                } else {
+                    RoundedRectangle(cornerRadius: 10.0)
+                }
+            }
+        }
+    }
 }
 
 
@@ -88,11 +83,11 @@ struct CardView: View{
 
 
 struct ContentView_Previews: PreviewProvider {
-   static var previews: some View {
-    Group {
-        ContentView()
-        ContentView()
-            .preferredColorScheme(.dark)
+    static var previews: some View {
+        Group {
+            ContentView(viewModel: EmojiMemoryGame())
+            ContentView(viewModel: EmojiMemoryGame())
+                .preferredColorScheme(.dark)
+        }
     }
-   }
 }
