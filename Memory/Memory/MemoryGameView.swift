@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MemoryGameView.swift
 //  Memory
 //
 //  Created by Ariel Hernández Amador for PMDM - iOS  2021.
@@ -8,13 +8,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var viewModel: EmojiMemoryGame
+struct MemoryGameView: View {
+    @ObservedObject var viewModel: EmojiMemoryGame
 
     var body: some View {
         VStack {
-            ForEach(0..<viewModel.board.cards.count) { row in
-                CardView(card: viewModel.board.cards[row])
+            ForEach(viewModel.board.cards) { card in
+                CardView(card: card)
+                    .onTapGesture { viewModel.choose(card: card) }
             }
         }
         .padding()
@@ -28,9 +29,14 @@ struct CardView: View{
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                if card.isFlipped {
-                    RoundedRectangle(cornerRadius: 10.0)
-                        .stroke()
+                if card.isFlipped || card.isMatched {
+                    if card.isMatched {
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .stroke(Color.green)
+                    } else {
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .stroke()
+                    }
                     RoundedRectangle(cornerRadius: 10.0)
                         .fill(Color.gray.opacity(0.25))
                     Text(card.content).font(Font.system(size: min(geometry.size.height, geometry.size.width) - 20))
@@ -85,8 +91,8 @@ struct CardView: View{
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView(viewModel: EmojiMemoryGame())
-            ContentView(viewModel: EmojiMemoryGame())
+            MemoryGameView(viewModel: EmojiMemoryGame())
+            MemoryGameView(viewModel: EmojiMemoryGame())
                 .preferredColorScheme(.dark)
         }
     }

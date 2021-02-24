@@ -8,12 +8,14 @@
 
 import Foundation
 
-class EmojiMemoryGame {
-    private(set) var board: MemoryBoard<String> = EmojiMemoryGame.createBoard()
+class EmojiMemoryGame: ObservableObject {
+    @Published private(set) var board: MemoryBoard<String>
 
-    static func createBoard() -> MemoryBoard<String> {
-        let emojis = ["🇪🇸", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🇦🇺"]
-        return MemoryBoard<String>(numberOfPairs: 3) { emojis[$0] }
+    init() {
+        let numberOfPairs = 3
+        let emojis = ["🇪🇸", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🇧🇷", "🇨🇺", "🇻🇪", "🇺🇸", "🇫🇷", "🇦🇺"]
+        let content = emojis.shuffled().prefix(numberOfPairs)
+        board = MemoryBoard<String>(numberOfPairs: content.count) { content[$0] }
     }
 
     // MARK: Intents
