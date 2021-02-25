@@ -16,5 +16,6 @@ Memory game inspired by [CS193p](https://cs193p.sites.stanford.edu)'s project. T
 
 Covered in lectures:
 - [Intro to SwiftUI](Slides/Lecture_1_PMDM_iOS.pdf)
-- [MVVM + Swift concepts](Slides/Lecture_2_PMDM_iOS.pdf)
+- [MVVM + Swift](Slides/Lecture_2_PMDM_iOS.pdf)
 - [Layout](Slides/Lecture_3_PMDM_iOS.pdf)
+- [Swift](Slides/Lecture_4_PMDM_iOS.pdf)

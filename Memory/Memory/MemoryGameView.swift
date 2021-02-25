@@ -12,34 +12,39 @@ struct MemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
 
     var body: some View {
-        VStack {
-            ForEach(viewModel.board.cards) { card in
-                CardView(card: card)
-                    .onTapGesture { viewModel.choose(card: card) }
+        VStack{
+            if viewModel.won {
+                Text("Has Ganado 🎉")
             }
+            GridView(viewModel.cardViewModels) { cardViewModel in
+                CardView(cardViewModel: cardViewModel)
+                    .onTapGesture { viewModel.choose(cardViewModel: cardViewModel) }
+
+            }
+            .padding()
+            .foregroundColor(Color.blue)
         }
-        .padding()
-        .foregroundColor(Color.blue)
     }
 }
 
 struct CardView: View{
-    var card: MemoryBoard<String>.Card
+    var cardViewModel: CardViewModel<String>
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                if card.isFlipped || card.isMatched {
-                    if card.isMatched {
+                if cardViewModel.isFlipped
+                    || cardViewModel.isMatched {
+                    if cardViewModel.isMatched {
                         RoundedRectangle(cornerRadius: 10.0)
-                            .stroke(Color.green)
+                            .stroke(Color.green, lineWidth:3)
                     } else {
                         RoundedRectangle(cornerRadius: 10.0)
-                            .stroke()
+                            .stroke(lineWidth: 3)
                     }
                     RoundedRectangle(cornerRadius: 10.0)
                         .fill(Color.gray.opacity(0.25))
-                    Text(card.content).font(Font.system(size: min(geometry.size.height, geometry.size.width) - 20))
+                    Text(cardViewModel.content).font(Font.system(size: min(geometry.size.height, geometry.size.width) - 20))
                 } else {
                     RoundedRectangle(cornerRadius: 10.0)
                 }

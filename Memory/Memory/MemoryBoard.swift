@@ -8,10 +8,15 @@
 
 import Foundation
 
+private enum MemoryBoardState {
+    case noFlippedCards
+    case oneFlippedCards(flippedInde: Int)
+    case twoFlippedCards(flippedIndex1: Int, flippedIndex2: Int)
+}
+
 struct MemoryBoard<ContentType: Equatable> {
     var cards: Array<Card>
-    var alreadyFlippedIndex1: Int = -1
-    var alreadyFlippedIndex2: Int = -1
+    private var state = MemoryBoardState.noFlippedCards
 
     init(numberOfPairs: Int, cardContentGenerator: (Int)->ContentType) {
         cards = [Card]()
@@ -24,42 +29,31 @@ struct MemoryBoard<ContentType: Equatable> {
     }
 
     mutating func choose(card:Card) {
-        let cardIndex = index(of: card)
+        let optionalIndex = cards.firstIndex { $0.id == card.id }
+        guard let cardIndex = optionalIndex else {
+            return
+        }
+        
         cards[cardIndex].isFlipped.toggle()
 
-        if alreadyFlippedIndex1 >= 0 && alreadyFlippedIndex2 >= 0 {
-            cards[alreadyFlippedIndex1].isFlipped.toggle()
-            cards[alreadyFlippedIndex2].isFlipped.toggle()
-            alreadyFlippedIndex1 = cardIndex
-            alreadyFlippedIndex2 = -1
-            return
-        } else if alreadyFlippedIndex1 == -1 {
-            alreadyFlippedIndex1 = cardIndex
-        } else if sameContent(card, as: cards[alreadyFlippedIndex1]) {
-            cards[alreadyFlippedIndex1].isFlipped = false
-            cards[cardIndex].isFlipped = false
-            cards[alreadyFlippedIndex1].isMatched = true
-            cards[cardIndex].isMatched = true
-            alreadyFlippedIndex1 = -1
-        } else {
-            alreadyFlippedIndex2 = cardIndex
-        }
-    }
-
-    func index(of card: Card) -> Int {
-        for index in 0..<cards.count {
-            if cards[index].id == card.id {
-                return index
+        switch state {
+        case .noFlippedCards:
+            state = .oneFlippedCards(flippedInde: cardIndex)
+        case .oneFlippedCards(let flippedIndex):
+            if card.content == cards[flippedIndex].content {
+                cards[flippedIndex].isFlipped = false
+                cards[cardIndex].isFlipped = false
+                cards[flippedIndex].isMatched = true
+                cards[cardIndex].isMatched = true
+                state = .noFlippedCards
+            } else {
+                state = .twoFlippedCards(flippedIndex1: flippedIndex, flippedIndex2: cardIndex)
             }
+        case .twoFlippedCards(let index1, let index2):
+            cards[index1].isFlipped.toggle()
+            cards[index2].isFlipped.toggle()
+            state = .oneFlippedCards(flippedInde: cardIndex)
         }
-
-        // HACK: Wrong!!!
-        return -1
-    }
-
-    func sameContent(_ card1:Card, as card2:Card) -> Bool
-    {
-        return card1.content == card2.content
     }
 
     struct Card: Identifiable {
