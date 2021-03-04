@@ -31,16 +31,6 @@ class MovieListViewModel {
         return Array(set).sorted()
     }
 
-    func movies(startingBy letter: String) -> [MovieModel] {
-        guard let movies = movies else { return [] }
-
-        let tmp = movies
-            .filter { $0.Title.hasPrefix(letter) }
-        let tmp2 = tmp
-            .sorted { $0.Title < $1.Title }
-        return tmp2
-    }
-
     init() {
         loadData()
     }
@@ -70,5 +60,31 @@ class MovieListViewModel {
 
         task.resume()
         session.finishTasksAndInvalidate()
+    }
+
+    private func movies(startingBy letter: String) -> [MovieModel] {
+        guard let movies = movies else { return [] }
+
+        return movies
+            .filter { $0.Title.hasPrefix(letter) }
+            .sorted { $0.Title < $1.Title }
+    }
+
+    func movie(at indexPath:IndexPath) -> MovieModel {
+        let letter = sectionIndexes[indexPath.section]
+        let sectionMovies = movies(startingBy: letter)
+        return sectionMovies[indexPath.row]
+    }
+
+    func numberOfMovies(startingBy letter: String) -> Int {
+        return movies(startingBy: letter).count
+    }
+
+    func movieCellViewModel(forMovieAt indexPath:IndexPath) -> MovieCellViewModel {
+        MovieCellViewModel(for: movie(at:indexPath))
+    }
+
+    func movieDetailViewModel(forMovieAt indexPath:IndexPath) -> MovieDetailViewModel {
+        MovieDetailViewModel(for: movie(at:indexPath))
     }
 }

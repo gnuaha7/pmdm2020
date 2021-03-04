@@ -13,6 +13,11 @@ struct MovieModel: Decodable {
     var Rated: String
     var Year: String
     var Runtime: String
+    var Poster: String
+    var imdbRating: String
+    var Metascore: String
+    var Plot: String
+    var Actors: String
 
-    var description: String { Title }
+//    var description: String { Title }
 }

@@ -22,7 +22,8 @@ class MovieListViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(MovieCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        title = "Movies"
     }
 }
 
@@ -44,16 +45,14 @@ extension MovieListViewController {
         }
 
         let letter = viewModel.sectionIndexes[section]
-        return viewModel.movies(startingBy: letter).count
+        return viewModel.numberOfMovies(startingBy: letter)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MovieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MovieCell
 
         if let viewModel = viewModel {
-            let letter = viewModel.sectionIndexes[indexPath.section]
-            let movies = viewModel.movies(startingBy: letter)
-            cell.movie = movies[indexPath.row]
+            cell.viewModel = viewModel.movieCellViewModel(forMovieAt:indexPath)
         }
         
         return cell
@@ -63,9 +62,17 @@ extension MovieListViewController {
 // MARK: UITableViewDelegate
 extension MovieListViewController {
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Tapp at \(indexPath.section),\(indexPath.row)")
+
+        let childViewModel = viewModel?.movieDetailViewModel(forMovieAt: indexPath)
+        let childViewController = MovieDetailViewController()
+        childViewController.viewModel = childViewModel
+
+        navigationController?.pushViewController(childViewController, animated: true)
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 105
+    }
 }
 
 extension MovieListViewController: MovieListViewModelDelegate {

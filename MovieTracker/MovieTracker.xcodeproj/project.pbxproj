@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B00E3D4925EE5D86005EEE8E /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00E3D4825EE5D86005EEE8E /* MovieTableViewCell.swift */; };
+		B003022525F0FBB500D06A2F /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003022425F0FBB500D06A2F /* MovieDetailViewController.swift */; };
+		B003022925F1005D00D06A2F /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003022825F1005D00D06A2F /* MovieDetailViewModel.swift */; };
+		B003022C25F1018D00D06A2F /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003022B25F1018D00D06A2F /* MovieCellViewModel.swift */; };
+		B00E3D4925EE5D86005EEE8E /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00E3D4825EE5D86005EEE8E /* MovieCell.swift */; };
 		B01F910025EE465D006E7E39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F90FF25EE465D006E7E39 /* AppDelegate.swift */; };
 		B01F910225EE465D006E7E39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F910125EE465D006E7E39 /* SceneDelegate.swift */; };
 		B01F910425EE465D006E7E39 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F910325EE465D006E7E39 /* MovieListViewController.swift */; };
@@ -18,7 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B00E3D4825EE5D86005EEE8E /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		B003022425F0FBB500D06A2F /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		B003022825F1005D00D06A2F /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		B003022B25F1018D00D06A2F /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
+		B00E3D4825EE5D86005EEE8E /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		B01F90FC25EE465D006E7E39 /* MovieTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01F90FF25EE465D006E7E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B01F910125EE465D006E7E39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,9 +68,12 @@
 			children = (
 				B01F90FF25EE465D006E7E39 /* AppDelegate.swift */,
 				B01F910125EE465D006E7E39 /* SceneDelegate.swift */,
+				B003022425F0FBB500D06A2F /* MovieDetailViewController.swift */,
+				B003022825F1005D00D06A2F /* MovieDetailViewModel.swift */,
 				B01F910325EE465D006E7E39 /* MovieListViewController.swift */,
 				B01F911525EE495F006E7E39 /* MovieListViewModel.swift */,
-				B00E3D4825EE5D86005EEE8E /* MovieTableViewCell.swift */,
+				B00E3D4825EE5D86005EEE8E /* MovieCell.swift */,
+				B003022B25F1018D00D06A2F /* MovieCellViewModel.swift */,
 				B01F911A25EE55BB006E7E39 /* MovieModel.swift */,
 				B01F910825EE465F006E7E39 /* Assets.xcassets */,
 				B01F910A25EE465F006E7E39 /* LaunchScreen.storyboard */,
@@ -143,8 +152,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B01F910425EE465D006E7E39 /* MovieListViewController.swift in Sources */,
+				B003022525F0FBB500D06A2F /* MovieDetailViewController.swift in Sources */,
 				B01F910025EE465D006E7E39 /* AppDelegate.swift in Sources */,
-				B00E3D4925EE5D86005EEE8E /* MovieTableViewCell.swift in Sources */,
+				B00E3D4925EE5D86005EEE8E /* MovieCell.swift in Sources */,
+				B003022C25F1018D00D06A2F /* MovieCellViewModel.swift in Sources */,
+				B003022925F1005D00D06A2F /* MovieDetailViewModel.swift in Sources */,
 				B01F911B25EE55BB006E7E39 /* MovieModel.swift in Sources */,
 				B01F911625EE495F006E7E39 /* MovieListViewModel.swift in Sources */,
 				B01F910225EE465D006E7E39 /* SceneDelegate.swift in Sources */,
