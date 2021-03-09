@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MovieCell: UITableViewCell {
 
@@ -14,13 +15,12 @@ class MovieCell: UITableViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
 
-            self.titleLabel.text = viewModel.title
-            self.subtitleLabel.text = viewModel.subtitleLabel
-            self.ratingLabel.text = viewModel.rating
+            titleLabel.text = viewModel.title
+            subtitleLabel.text = viewModel.subtitleLabel
+            ratingLabel.text = viewModel.rating
 
-            guard let url = viewModel.imageURL else { return }
-            guard let data = try? Data(contentsOf: url) else { return }
-            self.posterImageView.image = UIImage(data: data)
+            posterImageView.sd_setImage(with: viewModel.imageURL,
+                                        placeholderImage: UIImage(named: "placeholder"))
         }
     }
 

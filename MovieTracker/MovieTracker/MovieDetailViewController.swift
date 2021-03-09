@@ -21,9 +21,8 @@ class MovieDetailViewController: UIViewController {
             runningTimeLabel.text = viewModel.runningTime
             ratingLabel.text = viewModel.rating
 
-            guard let url = viewModel.imageURL else { return }
-            guard let data = try? Data(contentsOf: url) else { return }
-            self.posterImageView.image = UIImage(data: data)
+            posterImageView.sd_setImage(with: viewModel.imageURL,
+                                        placeholderImage: UIImage(named: "placeholder"))
         }
     }
 

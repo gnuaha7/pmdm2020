@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol MovieListViewModelDelegate {
     func didUpdateMovies(viewModel: MovieListViewModel);
@@ -36,30 +37,11 @@ class MovieListViewModel {
     }
 
     func loadData() {
-        let session = URLSession(configuration: .default)
-        guard let url = URL(string: "https://raw.githubusercontent.com/gnuaha7/pmdm2021/main/Examples/movies.json") else {
-            return
+        AF.request("https://raw.githubusercontent.com/gnuaha7/pmdm2021/main/Examples/movies.json")
+            .responseData { response in
+            guard let data = response.data else { return }
+            self.movies = try? JSONDecoder().decode([MovieModel].self, from: data)
         }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                print("Error loading data \(error!.localizedDescription)")
-                return
-            }
-
-            if data == nil {
-                print("No data")
-                return
-            }
-
-            self.movies = try? JSONDecoder().decode([MovieModel].self, from: data!)
-        }
-
-        task.resume()
-        session.finishTasksAndInvalidate()
     }
 
     private func movies(startingBy letter: String) -> [MovieModel] {
