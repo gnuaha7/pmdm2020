@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = MovieListViewController()
         viewController.viewModel = viewModel
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.overrideUserInterfaceStyle = .dark
 
         window.rootViewController = navigationController
 

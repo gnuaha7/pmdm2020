@@ -19,10 +19,14 @@ class MovieDetailViewController: UIViewController {
             titleLabel.text = viewModel.title
             yearLabel.text = viewModel.year
             runningTimeLabel.text = viewModel.runningTime
-            ratingLabel.text = viewModel.rating
+            imdbLabel.text = viewModel.imdbRating
 
             posterImageView.sd_setImage(with: viewModel.imageURL,
                                         placeholderImage: UIImage(named: "placeholder"))
+            updateNavigationBarButtons()
+
+            oldValue?.delegate = nil
+            viewModel.delegate = self
         }
     }
 
@@ -34,13 +38,12 @@ class MovieDetailViewController: UIViewController {
     let titleLabel = UILabel()
     let yearLabel = UILabel()
     let runningTimeLabel = UILabel()
-    let ratingLabel = UILabel()
+    let imdbLabel = UILabel()
+    let imdbImageView = UIImageView(image: UIImage(named:"imdb"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        self.view.backgroundColor = .white
 
         self.view.addSubview(contentStackView)
 
@@ -50,10 +53,17 @@ class MovieDetailViewController: UIViewController {
 
         headerStackView.addArrangedSubview(posterImageView)
 
+        let imdbStackView = UIStackView(arrangedSubviews: [
+            imdbImageView,
+            imdbLabel
+        ])
+        imdbStackView.spacing = 5
+
         let titlesStackView = UIStackView(arrangedSubviews: [titleLabel,
                                                              yearLabel,
                                                              runningTimeLabel,
-                                                             ratingLabel])
+                                                             imdbStackView
+        ])
         titlesStackView.axis = .vertical
 
         headerStackView.addArrangedSubview(titlesStackView)
@@ -61,6 +71,7 @@ class MovieDetailViewController: UIViewController {
         headerStackView.alignment = .center
 
         posterImageView.contentMode = .scaleAspectFit
+        imdbImageView.contentMode = .scaleAspectFit
         extraDataLabel.numberOfLines = 2
         plotLabel.numberOfLines = 0
 
@@ -75,22 +86,46 @@ class MovieDetailViewController: UIViewController {
             contentStackView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
             posterImageView.heightAnchor.constraint(equalToConstant: 200),
-            posterImageView.widthAnchor.constraint(equalToConstant: 150)
+            posterImageView.widthAnchor.constraint(equalToConstant: 150),
+            imdbImageView.widthAnchor.constraint(equalToConstant: 40),
+            imdbImageView.heightAnchor.constraint(equalToConstant: 35)
         ])
 
-        let action = UIAction { _ in
-            guard let viewModel = self.viewModel else { return }
-            let activityViewController = UIActivityViewController(activityItems: [
-                                                                    viewModel.imageURL!,
-                                                                    viewModel.title],
-                                                                  applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
-        }
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share",
-                                                            image: UIImage(systemName: "square.and.arrow.up"),
-                                                            primaryAction:action,
-                                                            menu: nil)
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(title: "Track",
+                            image: UIImage(systemName: "checkmark.square"),
+                            primaryAction:UIAction { _ in self.viewModel?.toggleTracked()},
+                            menu: nil),
+            UIBarButtonItem(title: "Favorite",
+                            image: UIImage(systemName: "suit.heart"),
+                            primaryAction:UIAction { _ in self.viewModel?.toggleLoved()},
+                            menu: nil)
+        ]
+        updateNavigationBarButtons()
     }
+}
+
+extension MovieDetailViewController: MovieDetailViewModelDelegate {
+    func updateNavigationBarButtons () {
+        let (trackedItem, favItem) = (navigationItem.rightBarButtonItems?[0],
+                                      navigationItem.rightBarButtonItems?[1])
+
+        trackedItem?.image = (viewModel?.tracked ?? false
+                                ? UIImage(systemName: "checkmark.square.fill")
+                                : UIImage(systemName: "checkmark.square"))
+        favItem?.image = (viewModel?.loved ?? false
+                                ? UIImage(systemName: "suit.heart.fill")
+                                : UIImage(systemName: "suit.heart"))
+    }
+
+    func didChangedTrackedState(viewModel: MovieDetailViewModel) {
+        updateNavigationBarButtons()
+    }
+
+    func didChangedLovedState(viewModel: MovieDetailViewModel) {
+        updateNavigationBarButtons()
+    }
+
+
 }

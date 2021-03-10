@@ -8,8 +8,14 @@
 
 import Foundation
 
+protocol MovieDetailViewModelDelegate {
+    func didChangedTrackedState(viewModel: MovieDetailViewModel);
+    func didChangedLovedState(viewModel: MovieDetailViewModel);
+}
+
 class MovieDetailViewModel {
     private let movie: MovieModel
+    var delegate: MovieDetailViewModelDelegate?
 
     init(for movie:MovieModel) {
         self.movie = movie
@@ -35,11 +41,24 @@ class MovieDetailViewModel {
         movie.Runtime
     }
 
-    var rating: String {
-        "Meta: \(movie.Metascore) • IMDB: \(movie.imdbRating)"
+    var imdbRating: String {
+        movie.imdbRating
     }
 
     var imageURL: URL? {
         URL(string: movie.Poster)
+    }
+
+    var loved = false
+    var tracked = false
+
+    func toggleTracked() {
+        tracked.toggle()
+        delegate?.didChangedTrackedState(viewModel: self)
+    }
+
+    func toggleLoved() {
+        loved.toggle()
+        delegate?.didChangedLovedState(viewModel: self)
     }
 }
