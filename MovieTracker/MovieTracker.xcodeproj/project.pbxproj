@@ -17,9 +17,13 @@
 		B01F910925EE465F006E7E39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B01F910825EE465F006E7E39 /* Assets.xcassets */; };
 		B01F910C25EE465F006E7E39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01F910A25EE465F006E7E39 /* LaunchScreen.storyboard */; };
 		B01F911625EE495F006E7E39 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F911525EE495F006E7E39 /* MovieListViewModel.swift */; };
-		B01F911B25EE55BB006E7E39 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F911A25EE55BB006E7E39 /* MovieModel.swift */; };
+		B01F911B25EE55BB006E7E39 /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F911A25EE55BB006E7E39 /* MovieData.swift */; };
 		B09E153725F7807A00D5DB00 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B09E153625F7807A00D5DB00 /* Alamofire */; };
 		B09E153B25F7849900D5DB00 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B09E153A25F7849900D5DB00 /* SDWebImage */; };
+		B0B2D23225FA245B00E8FFFB /* MovieTarckerMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0B2D23025FA245B00E8FFFB /* MovieTarckerMap.xcdatamodeld */; };
+		B0CCF17625FA273200B44ADB /* MovieModel+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CCF17525FA273200B44ADB /* MovieModel+Convenience.swift */; };
+		B0CCF17925FA38CC00B44ADB /* ActorModel+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CCF17825FA38CC00B44ADB /* ActorModel+Convenience.swift */; };
+		B0CCF17C25FA39E600B44ADB /* RatedModel+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CCF17B25FA39E600B44ADB /* RatedModel+Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +39,11 @@
 		B01F910B25EE465F006E7E39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B01F910D25EE465F006E7E39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B01F911525EE495F006E7E39 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
-		B01F911A25EE55BB006E7E39 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		B01F911A25EE55BB006E7E39 /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
+		B0B2D23125FA245B00E8FFFB /* MovieTarckerMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieTarckerMap.xcdatamodel; sourceTree = "<group>"; };
+		B0CCF17525FA273200B44ADB /* MovieModel+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieModel+Convenience.swift"; sourceTree = "<group>"; };
+		B0CCF17825FA38CC00B44ADB /* ActorModel+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActorModel+Convenience.swift"; sourceTree = "<group>"; };
+		B0CCF17B25FA39E600B44ADB /* RatedModel+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RatedModel+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +78,7 @@
 		B01F90FE25EE465D006E7E39 /* MovieTracker */ = {
 			isa = PBXGroup;
 			children = (
+				B0B2D22E25FA240C00E8FFFB /* Data Models */,
 				B01F90FF25EE465D006E7E39 /* AppDelegate.swift */,
 				B01F910125EE465D006E7E39 /* SceneDelegate.swift */,
 				B003022425F0FBB500D06A2F /* MovieDetailViewController.swift */,
@@ -78,12 +87,23 @@
 				B01F911525EE495F006E7E39 /* MovieListViewModel.swift */,
 				B00E3D4825EE5D86005EEE8E /* MovieCell.swift */,
 				B003022B25F1018D00D06A2F /* MovieCellViewModel.swift */,
-				B01F911A25EE55BB006E7E39 /* MovieModel.swift */,
 				B01F910825EE465F006E7E39 /* Assets.xcassets */,
 				B01F910A25EE465F006E7E39 /* LaunchScreen.storyboard */,
 				B01F910D25EE465F006E7E39 /* Info.plist */,
 			);
 			path = MovieTracker;
+			sourceTree = "<group>";
+		};
+		B0B2D22E25FA240C00E8FFFB /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				B01F911A25EE55BB006E7E39 /* MovieData.swift */,
+				B0B2D23025FA245B00E8FFFB /* MovieTarckerMap.xcdatamodeld */,
+				B0CCF17525FA273200B44ADB /* MovieModel+Convenience.swift */,
+				B0CCF17825FA38CC00B44ADB /* ActorModel+Convenience.swift */,
+				B0CCF17B25FA39E600B44ADB /* RatedModel+Convenience.swift */,
+			);
+			path = "Data Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,10 +186,14 @@
 				B01F910425EE465D006E7E39 /* MovieListViewController.swift in Sources */,
 				B003022525F0FBB500D06A2F /* MovieDetailViewController.swift in Sources */,
 				B01F910025EE465D006E7E39 /* AppDelegate.swift in Sources */,
+				B0CCF17625FA273200B44ADB /* MovieModel+Convenience.swift in Sources */,
 				B00E3D4925EE5D86005EEE8E /* MovieCell.swift in Sources */,
+				B0B2D23225FA245B00E8FFFB /* MovieTarckerMap.xcdatamodeld in Sources */,
+				B0CCF17C25FA39E600B44ADB /* RatedModel+Convenience.swift in Sources */,
 				B003022C25F1018D00D06A2F /* MovieCellViewModel.swift in Sources */,
 				B003022925F1005D00D06A2F /* MovieDetailViewModel.swift in Sources */,
-				B01F911B25EE55BB006E7E39 /* MovieModel.swift in Sources */,
+				B01F911B25EE55BB006E7E39 /* MovieData.swift in Sources */,
+				B0CCF17925FA38CC00B44ADB /* ActorModel+Convenience.swift in Sources */,
 				B01F911625EE495F006E7E39 /* MovieListViewModel.swift in Sources */,
 				B01F910225EE465D006E7E39 /* SceneDelegate.swift in Sources */,
 			);
@@ -397,6 +421,19 @@
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		B0B2D23025FA245B00E8FFFB /* MovieTarckerMap.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B0B2D23125FA245B00E8FFFB /* MovieTarckerMap.xcdatamodel */,
+			);
+			currentVersion = B0B2D23125FA245B00E8FFFB /* MovieTarckerMap.xcdatamodel */;
+			path = MovieTarckerMap.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B01F90F425EE465D006E7E39 /* Project object */;
 }

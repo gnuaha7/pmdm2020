@@ -8,16 +8,18 @@
 
 import Foundation
 
-struct MovieModel: Decodable {
+struct MovieData: Decodable {
     var Title: String
-    var Rated: String
+
     var Year: String
     var Runtime: String
     var Poster: String
     var imdbRating: String
     var Metascore: String
     var Plot: String
-    var Actors: String
+    var imdbID: String
 
-//    var description: String { Title }
+    var Actors: String
+    var Rated: String
+    var Country: String
 }

@@ -25,6 +25,8 @@ class MovieDetailViewController: UIViewController {
                                         placeholderImage: UIImage(named: "placeholder"))
             updateNavigationBarButtons()
 
+            actorsLabel.text = viewModel.actors
+
             oldValue?.delegate = nil
             viewModel.delegate = self
         }
@@ -33,6 +35,7 @@ class MovieDetailViewController: UIViewController {
     let contentStackView = UIStackView()
     let headerStackView = UIStackView()
     let extraDataLabel = UILabel()
+    let actorsLabel = UILabel()
     let plotLabel = UILabel()
     let posterImageView = UIImageView()
     let titleLabel = UILabel()
@@ -77,6 +80,7 @@ class MovieDetailViewController: UIViewController {
 
         contentStackView.addArrangedSubview(headerStackView)
         contentStackView.addArrangedSubview(extraDataLabel)
+        contentStackView.addArrangedSubview(actorsLabel)
         contentStackView.addArrangedSubview(plotLabel)
         contentStackView.addArrangedSubview(UIView())
 

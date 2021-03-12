@@ -16,18 +16,18 @@ class MovieCellViewModel {
     }
 
     var title: String {
-        movie.Title
+        movie.title_
     }
 
     var subtitleLabel: String {
-        "(\(movie.Year)) • \(movie.Runtime)"
+        "(\(movie.year)) • \(movie.runtime_)"
     }
 
     var rating: String {
-        movie.Metascore
+        "\(movie.metascore)"
     }
 
     var imageURL: URL? {
-        URL(string: movie.Poster)
+        return movie.poster
     }
 }

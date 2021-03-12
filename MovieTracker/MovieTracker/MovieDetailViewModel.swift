@@ -22,35 +22,55 @@ class MovieDetailViewModel {
     }
 
     var title: String {
-        movie.Title
+        movie.title_
     }
 
     var plot: String {
-        movie.Plot
+        movie.plot_
     }
 
     var extraData: String {
-        "Actors: \(movie.Actors)"
+        movie.rated?.name ?? "Not Rated"
+    }
+
+    var actors: String {
+        movie.actors_.map { $0.name_ }.joined(separator: ", ")
+
     }
 
     var year: String {
-        "(\(movie.Year))"
+        "(\(movie.year))"
     }
 
     var runningTime: String {
-        movie.Runtime
+        movie.runtime_
     }
 
     var imdbRating: String {
-        movie.imdbRating
+        "\(movie.imdbRating)"
     }
 
     var imageURL: URL? {
-        URL(string: movie.Poster)
+        movie.poster
     }
 
-    var loved = false
-    var tracked = false
+    var loved: Bool {
+        get {
+            movie.loved
+        }
+        set {
+            movie.loved = newValue
+        }
+    }
+
+    var tracked: Bool {
+        get {
+            movie.tracked
+        }
+        set {
+            movie.tracked = newValue
+        }
+    }
 
     func toggleTracked() {
         tracked.toggle()

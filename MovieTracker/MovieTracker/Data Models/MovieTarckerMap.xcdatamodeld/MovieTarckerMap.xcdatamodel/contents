@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ActorModel" representedClassName="ActorModel" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieModel" inverseName="actors" inverseEntity="MovieModel"/>
+    </entity>
+    <entity name="CountryModel" representedClassName="CountryModel" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieModel" inverseName="countries" inverseEntity="MovieModel"/>
+    </entity>
+    <entity name="MovieModel" representedClassName="MovieModel" syncable="YES" codeGenerationType="class">
+        <attribute name="imdbId" optional="YES" attributeType="String"/>
+        <attribute name="imdbRating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="loved" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="metascore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="plot" optional="YES" attributeType="String"/>
+        <attribute name="poster" optional="YES" attributeType="URI"/>
+        <attribute name="runtime" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="tracked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="actors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActorModel" inverseName="movies" inverseEntity="ActorModel"/>
+        <relationship name="countries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CountryModel" inverseName="movies" inverseEntity="CountryModel"/>
+        <relationship name="rated" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RatedModel" inverseName="movies" inverseEntity="RatedModel"/>
+    </entity>
+    <entity name="RatedModel" representedClassName="RatedModel" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieModel" inverseName="rated" inverseEntity="MovieModel"/>
+    </entity>
+    <elements>
+        <element name="ActorModel" positionX="1.29766845703125" positionY="252.5772705078125" width="128" height="14"/>
+        <element name="CountryModel" positionX="115.669921875" positionY="4.650360107421875" width="128" height="14"/>
+        <element name="MovieModel" positionX="23.92279052734375" positionY="142.1107177734375" width="128" height="238"/>
+        <element name="RatedModel" positionX="-54" positionY="0" width="128" height="14"/>
+    </elements>
+</model>
